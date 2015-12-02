@@ -1,0 +1,44 @@
+(gdb) disas main
+Dump of assembler code for function main:
+   0x08048e44 <+0>:	push   %ebp
+   0x08048e45 <+1>:	mov    %esp,%ebp
+   0x08048e47 <+3>:	and    $0xfffffff0,%esp
+   0x08048e4a <+6>:	sub    $0x20,%esp                               // 32 allocated bytes for main stack 
+   0x08048e4d <+9>:	movl   $0x1a,(%esp)                             // LameCode:6  - #define NUM_QUESTIONS 26
+   0x08048e54 <+16>:	call   0x8048eea <get_random_choice>            // LameCode:78 - rchoice = get_random_choice(NUM_QUESTIONS);
+   0x08048e59 <+21>:	mov    %eax,0x1c(%esp)                          // LameCode:78 - rchoice = get_random_choice(NUM_QUESTIONS);
+   0x08048e5d <+25>:	call   0x8048f93 <print_welcome>                // LameCode:79 - print_welcome();
+   0x08048e62 <+30>:	call   0x8048f61 <be_superficially_friendly>    // LameCode:80 - be_superficially_friendly();
+   0x08048e67 <+35>:	mov    0x1c(%esp),%eax                          // LameCode:81 - if (play_game(&problems[rchoice]))
+   0x08048e6b <+39>:	shl    $0x3,%eax                                // LameCode:81 - if (play_game(&problems[rchoice]))
+   0x08048e6e <+42>:	add    $0x80eb080,%eax                          // LameCode:81 - if (play_game(&problems[rchoice]))
+   0x08048e73 <+47>:	mov    %eax,(%esp)                              // LameCode:81 - if (play_game(&problems[rchoice]))
+   0x08048e76 <+50>:	call   0x8048e99 <play_game>                    // LameCode:81 - if (play_game(&problems[rchoice]))
+   0x08048e7b <+55>:	test   %eax,%eax                                // LameCode:81 - if (play_game(&problems[rchoice]))
+   0x08048e7d <+57>:	je     0x8048e86 <main+66>                      // LameCode:83 - else
+   0x08048e7f <+59>:	call   0x8048f17 <winner>                       // LameCode:82 - winner();
+   0x08048e84 <+64>:	jmp    0x8048e92 <main+78>                      // LameCode:86 - return 0;
+   0x08048e86 <+66>:	mov    0x1c(%esp),%eax                          // LameCode:84 - loser(rchoice);
+   0x08048e8a <+70>:	mov    %eax,(%esp)                              // LameCode:84 - loser(rchoice);
+   0x08048e8d <+73>:	call   0x8048f35 <loser>                        // LameCode:84 - loser(rchoice);
+   0x08048e92 <+78>:	mov    $0x0,%eax                                // LameCode:86 - return 0;
+   0x08048e97 <+83>:	leave  
+   0x08048e98 <+84>:	ret    
+End of assembler dump.
+(gdb) disas be_superficially_friendly
+Dump of assembler code for function be_superficially_friendly:
+   0x08048f61 <+0>:	push   %ebp
+   0x08048f62 <+1>:	mov    %esp,%ebp
+   0x08048f64 <+3>:	sub    $0x38,%esp                   // 56 bytes allocated for stack
+   0x08048f67 <+6>:	movl   $0x80befd0,(%esp)            // LameCode:123 - printf("What's your name ? ");
+   0x08048f6e <+13>:	call   0x804f7e0 <printf>           // LameCode:123 - printf("What's your name ? ");   
+   0x08048f73 <+18>:	lea    -0x28(%ebp),%eax             // LameCode:121 - char name[32]; 
+   0x08048f76 <+21>:	mov    %eax,(%esp)                  // LameCode:124 - gets(name);
+   0x08048f79 <+24>:	call   0x804fd40 <gets>             // LameCode:124 - gets(name);
+   0x08048f7e <+29>:	lea    -0x28(%ebp),%eax             // LameCode:124 - gets(name);
+   0x08048f81 <+32>:	mov    %eax,0x4(%esp)               // LameCode:125 - printf("Hi, %s.  Get ready to play.\n", name);
+   0x08048f85 <+36>:	movl   $0x80befe4,(%esp)            // LameCode:125 - printf("Hi, %s.  Get ready to play.\n", name);
+   0x08048f8c <+43>:	call   0x804f7e0 <printf>           // LameCode:125 - printf("Hi, %s.  Get ready to play.\n", name);
+   0x08048f91 <+48>:	leave  
+   0x08048f92 <+49>:	ret    
+End of assembler dump.
