@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define BUF_LEN 48   /* INSERT BUFFER LENGTH HERE */
+#define BUF_LEN 51   /* INSERT BUFFER LENGTH HERE */
 #define WINNER_ADDR 0x8048f17 /* INSERT ADDRESS OF THE WINNER FUNCTION HERE */
 
 int main(int argc, char **argv)
